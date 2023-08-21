@@ -7,7 +7,7 @@ import { Tracking } from "./pages/Tracking";
 
 function App() {
   return (
-    <div className="relative">
+    <div className="relative bg-slate-200">
       <BrowserRouter>
         <div className="w-full lg:w-[600px] mx-auto fixed bottom-0 left-0 lg:left-1/2 lg:-translate-x-1/2">
           <Navbar />
