@@ -1,14 +1,19 @@
 import { NavLink } from "react-router-dom";
-import home from "../assets/home.svg";
-import edit from "../assets/edit.svg";
-import stats from "../assets/chart-histogram.svg";
-import music from "../assets/list-music.svg";
 
 export const Navbar = () => {
   return (
-    <div className="w-full px-6 py-2 bg-sky-300 flex justify-center gap-10">
-      <NavLink to="/" className="py-2 px-6 rounded-full hover:bg-white">
-        <img src={home} alt="home" width={20} />
+    <div className="w-full px-6 py-2 bg-primary flex justify-center gap-8">
+      <NavLink to="/" className="py-2 px-8 rounded-full hover:bg-white hover:bg-opacity-20 group">
+        <i className="fi fi-rr-home text-white"></i>
+      </NavLink>
+      <NavLink to="/work" className="py-2 px-8 rounded-full hover:bg-white hover:bg-opacity-20 group">
+        <i className="fi fi-rr-edit text-white"></i>
+      </NavLink>
+      <NavLink to="/track" className="py-2 px-8 rounded-full hover:bg-white hover:bg-opacity-20 group">
+        <i className="fi fi-rr-chart-histogram text-white"></i>
+      </NavLink>
+      <NavLink to="/music" className="py-2 px-8 rounded-full hover:bg-white hover:bg-opacity-20 group">
+        <i className="fi fi-rr-list-music text-white"></i>
       </NavLink>
     </div>
   );
