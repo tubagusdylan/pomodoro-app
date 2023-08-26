@@ -3,22 +3,37 @@ import { useSelector } from "react-redux";
 
 export const useCountdown = () => {
   const [second, setSecond] = useState(0);
-  const { isPlay } = useSelector((state) => state.pomodoro);
+  const [minute, setMinute] = useState(0);
+  const { isPlay, isPause } = useSelector((state) => state.pomodoro);
 
   useEffect(() => {
     if (!isPlay) {
       return;
     }
+    if (isPause) {
+      return;
+    }
+
     const timeout = setTimeout(() => {
       setSecond(second - 1);
     }, 1000);
 
-    return () => clearTimeout(timeout);
-  }, [isPlay, second]);
+    if (second <= 0 && minute <= 0) {
+      setSecond(0);
+      setMinute(0);
+      return;
+    } else if (second < 0) {
+      setSecond(59);
+      setMinute(minute - 1);
+    }
 
-  function start(second) {
+    return () => clearTimeout(timeout);
+  }, [isPlay, isPause, second, minute]);
+
+  function start(minute, second) {
     setSecond(second);
+    setMinute(minute);
   }
 
-  return { second, start };
+  return { minute, second, start };
 };
