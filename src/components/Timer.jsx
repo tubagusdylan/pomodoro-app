@@ -7,16 +7,16 @@ import { useCountdown } from "../hooks/useCountdown";
 export const Timer = () => {
   const { isPlay, isPause } = useSelector((state) => state.pomodoro);
   const [isEdit, setIsEdit] = useState(false);
-  const { minute, second, start } = useCountdown();
-  const [defaultMinute, setDefaultMinute] = useState(25);
-  const [menit, setMenit] = useState(defaultMinute);
-  const [detik, setDetik] = useState(0);
+  const { menit, detik, start } = useCountdown(); // udah reduxState
+  const [defaultMinute, setDefaultMinute] = useState(30);
+  const [menitLocal, setMenitLocal] = useState(defaultMinute);
+  const [detikLocal, setDetikLocal] = useState(0);
 
   const saveMinute = (e) => {
     if (e.target.value <= 0 || e.target.value > 60) {
       return;
     }
-    setMenit(e.target.value);
+    setMenitLocal(e.target.value);
     setDefaultMinute(e.target.value);
     start(e.target.value, 0);
   };
@@ -30,13 +30,13 @@ export const Timer = () => {
       return;
     }
 
-    start(menit, detik);
+    start(menitLocal, detikLocal);
   }, [isPlay, isPause]);
 
   useEffect(() => {
-    setDetik(second);
-    setMenit(minute);
-  }, [minute, second]);
+    setDetikLocal(detik);
+    setMenitLocal(menit);
+  }, [menit, detik]);
 
   return (
     <div className="w-[200px] md:w-[300px] mx-auto mt-16 py-6">
@@ -45,12 +45,12 @@ export const Timer = () => {
           <div>
             <input autoFocus min={1} max={60} type="number" name="minute" className="bg-transparent w-20 text-6xl md:text-7xl text-right font-semibold remove-arrow focus:outline-none" value={menit} onChange={saveMinute} />
             <span className="text-6xl md:text-7xl font-semibold group-hover:cursor-pointer" onClick={() => setIsEdit(false)}>
-              :{`0${second}`}
+              :{`0${detik}`}
             </span>
           </div>
         ) : (
           <span className="text-6xl md:text-7xl font-semibold group-hover:cursor-pointer" onClick={() => setIsEdit(true)}>
-            {minute < 10 ? `0${minute}` : minute}:{second < 10 ? `0${second}` : second}
+            {menit < 10 ? `0${menit}` : menit}:{detik < 10 ? `0${detik}` : detik}
           </span>
         )}
       </div>

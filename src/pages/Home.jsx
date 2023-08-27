@@ -38,7 +38,6 @@ export const Home = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {
-        dispatch(signOutUser());
         return;
       }
       const displayName = currentUser.displayName;

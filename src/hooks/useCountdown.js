@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { stop } from "../features/pomodoroSlice";
+import { stop, setMinute, setMinutePlay, setSecond, setSecondPlay } from "../features/pomodoroSlice";
 
 export const useCountdown = () => {
-  const [second, setSecond] = useState(0);
-  const [minute, setMinute] = useState(0);
-  const { isPlay, isPause } = useSelector((state) => state.pomodoro);
+  // const [second, setSecond] = useState(0);
+  // const [minute, setMinute] = useState(0);
+  const { isPlay, isPause, menit, detik } = useSelector((state) => state.pomodoro);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,23 +17,24 @@ export const useCountdown = () => {
     }
 
     const timeout = setTimeout(() => {
-      setSecond(second - 1);
+      dispatch(setSecondPlay());
     }, 1000);
 
-    if (second <= 0 && minute <= 0) {
+    if (detik <= 0 && menit <= 0) {
       dispatch(stop());
-    } else if (second < 0) {
-      setSecond(59);
-      setMinute(minute - 1);
+    } else if (detik < 0) {
+      const detik = 59;
+      dispatch(setSecond({ detik }));
+      dispatch(setMinutePlay());
     }
 
     return () => clearTimeout(timeout);
-  }, [isPlay, isPause, second, minute, dispatch]);
+  }, [isPlay, isPause, detik, menit, dispatch]);
 
-  function start(minute, second) {
-    setSecond(second);
-    setMinute(minute);
+  function start(menit, detik) {
+    dispatch(setSecond({ detik }));
+    dispatch(setMinute({ menit }));
   }
 
-  return { minute, second, start };
+  return { menit, detik, start };
 };
