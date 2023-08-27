@@ -45,12 +45,12 @@ export const Timer = () => {
           <div>
             <input autoFocus min={1} max={60} type="number" name="minute" className="bg-transparent w-20 text-6xl md:text-7xl text-right font-semibold remove-arrow focus:outline-none" value={menit} onChange={saveMinute} />
             <span className="text-6xl md:text-7xl font-semibold group-hover:cursor-pointer" onClick={() => setIsEdit(false)}>
-              :{second}
+              :{`0${second}`}
             </span>
           </div>
         ) : (
           <span className="text-6xl md:text-7xl font-semibold group-hover:cursor-pointer" onClick={() => setIsEdit(true)}>
-            {minute}:{second}
+            {minute < 10 ? `0${minute}` : minute}:{second < 10 ? `0${second}` : second}
           </span>
         )}
       </div>
