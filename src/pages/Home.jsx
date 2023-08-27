@@ -1,17 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlayPomodoro } from "../components/PlayPomodoro";
 import { Timer } from "../components/Timer";
 import { UserPopup } from "../components/UserPopup";
 import { auth, provider } from "../firebase/index";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { useSelector, useDispatch } from "react-redux";
-import { signIn, signOutUser } from "../features/userSlice";
-import { useEffect } from "react";
+import { signIn, signOutUser, setUser } from "../features/userSlice";
 
 export const Home = () => {
   const [userModal, setUserModal] = useState(false);
-  const [user, setUser] = useState({});
-  const { isSignin } = useSelector((state) => state.user);
+  const { isSignin, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
@@ -43,9 +41,10 @@ export const Home = () => {
         dispatch(signOutUser());
         return;
       }
+      const displayName = currentUser.displayName;
+      const photoUrl = currentUser.photoURL;
       dispatch(signIn());
-      setUser(currentUser);
-      console.log(currentUser);
+      dispatch(setUser({ displayName, photoUrl }));
     });
   }, [dispatch]);
 
@@ -72,3 +71,5 @@ export const Home = () => {
     </div>
   );
 };
+
+// Next nya data user harus masuk ke redux, biar gampang oper datanya
