@@ -9,11 +9,11 @@ const userSlice = createSlice({
     signIn: (state) => {
       state.isSignin = true;
     },
-    signOut: (state) => {
+    signOutUser: (state) => {
       state.isSignin = false;
     },
   },
 });
 
-export const { signIn, signOut } = userSlice.actions;
+export const { signIn, signOutUser } = userSlice.actions;
 export default userSlice.reducer;

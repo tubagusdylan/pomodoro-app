@@ -17,5 +17,5 @@
 }
 
 .Modal {
-  @apply mx-auto mt-48 bg-white w-[300px] lg:w-[400px] h-[200px] rounded-lg shadow-lg flex flex-wrap justify-center items-center;
+  @apply mx-auto mt-48 bg-white w-[300px] lg:w-[400px] h-[200px] rounded-lg shadow-lg flex flex-wrap justify-center items-center relative;
 }
