@@ -1,42 +1,42 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useCountdown } from "../hooks/useCountdown";
+import { setMenitPause, setDetikPause, setDefaultMenit } from "../features/pomodoroSlice";
 
 export const Timer = () => {
-  const { isPlay, isPause } = useSelector((state) => state.pomodoro);
+  const { isPlay, isPause, defaultMenit, menitPause, detikPause } = useSelector((state) => state.pomodoro);
   const [isEdit, setIsEdit] = useState(false);
   const { menit, detik, start } = useCountdown(); // udah reduxState
-  const [defaultMinute, setDefaultMinute] = useState(30);
-  const [menitLocal, setMenitLocal] = useState(defaultMinute);
-  const [detikLocal, setDetikLocal] = useState(0);
+  const dispatch = useDispatch();
 
   const saveMinute = (e) => {
     if (e.target.value <= 0 || e.target.value > 60) {
       return;
     }
-    setMenitLocal(e.target.value);
-    setDefaultMinute(e.target.value);
+
+    dispatch(setMenitPause(e.target.value));
+    dispatch(setDefaultMenit(e.target.value));
     start(e.target.value, 0);
   };
 
   useEffect(() => {
     if (!isPlay) {
-      start(defaultMinute, 0);
+      start(defaultMenit, 0);
       return;
     }
     if (isPause) {
       return;
     }
 
-    start(menitLocal, detikLocal);
+    start(menitPause, detikPause);
   }, [isPlay, isPause]);
 
   useEffect(() => {
-    setDetikLocal(detik);
-    setMenitLocal(menit);
-  }, [menit, detik]);
+    dispatch(setMenitPause(menit));
+    dispatch(setDetikPause(detik));
+  }, [menit, detik, dispatch]);
 
   return (
     <div className="w-[200px] md:w-[300px] mx-auto mt-16 py-6">

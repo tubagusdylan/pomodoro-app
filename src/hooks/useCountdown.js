@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { stop, setMinute, setMinutePlay, setSecond, setSecondPlay } from "../features/pomodoroSlice";
 
 export const useCountdown = () => {
-  // const [second, setSecond] = useState(0);
-  // const [minute, setMinute] = useState(0);
   const { isPlay, isPause, menit, detik } = useSelector((state) => state.pomodoro);
   const dispatch = useDispatch();
 

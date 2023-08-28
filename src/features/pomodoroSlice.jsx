@@ -7,6 +7,9 @@ const pomodoroSlice = createSlice({
     isPause: false,
     detik: 0,
     menit: 0,
+    defaultMenit: 25,
+    menitPause: 0,
+    detikPause: 0,
   },
   reducers: {
     play: (state) => {
@@ -30,8 +33,17 @@ const pomodoroSlice = createSlice({
     setSecondPlay: (state) => {
       state.detik = state.detik - 1;
     },
+    setDefaultMenit: (state, action) => {
+      state.defaultMenit = action.payload;
+    },
+    setMenitPause: (state, action) => {
+      state.menitPause = action.payload;
+    },
+    setDetikPause: (state, action) => {
+      state.detikPause = action.payload;
+    },
   },
 });
 
-export const { play, pause, stop, setMinute, setMinutePlay, setSecond, setSecondPlay } = pomodoroSlice.actions;
+export const { play, pause, stop, setMinute, setMinutePlay, setSecond, setSecondPlay, setDefaultMenit, setMenitPause, setDetikPause } = pomodoroSlice.actions;
 export default pomodoroSlice.reducer;
