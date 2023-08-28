@@ -20,7 +20,7 @@ export const useCountdown = () => {
 
     if (detik <= 0 && menit <= 0) {
       dispatch(stop());
-    } else if (detik < 0) {
+    } else if (detik <= 0) {
       const detik = 59;
       dispatch(setSecond({ detik }));
       dispatch(setMinutePlay());
