@@ -13,12 +13,9 @@ export const InputToDo = () => {
     }
 
     const newTodo = {
-      category: "belajar",
-      todos: {
-        id: Math.floor(Math.random() * 100),
-        activity: task,
-        done: false,
-      },
+      id: Math.floor(Math.random() * 100),
+      activity: task,
+      done: false,
     };
 
     dispatch(createTodo(newTodo));

@@ -19,3 +19,22 @@
 .Modal {
   @apply mx-auto mt-48 bg-white w-[300px] lg:w-[400px] h-[200px] rounded-lg shadow-lg flex flex-wrap justify-center items-center relative;
 }
+
+.custom-checkbox {
+  @apply appearance-none bg-slate-100 m-0 w-5 h-5 border-2 border-slate-500 rounded-full inline-grid align-middle place-content-center -translate-y-[0.075em] mr-3 before:content-none before:w-3 before:h-3 before:scale-0 before:transition-transform before:ease-in-out before:duration-150;
+}
+
+.custom-checkbox::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #1b9aaa;
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.custom-checkbox:checked::before {
+  transform: scale(1);
+}
