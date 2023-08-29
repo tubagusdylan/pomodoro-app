@@ -70,5 +70,3 @@ export const Home = () => {
     </div>
   );
 };
-
-// Next nya data user harus masuk ke redux, biar gampang oper datanya
