@@ -23,10 +23,10 @@ export const InputToDo = () => {
   };
 
   return (
-    <div className="bg-slate-50 px-4 rounded-sm">
+    <div className="w-full bg-slate-50 px-4 rounded-sm">
       <form onSubmit={handleTodo} noValidate>
         <i className="fi fi-rr-plus lg:w-[10%] text-primary"></i>
-        <input type="text" className="bg-slate-50 px-5 py-2 w-[95%] outline-none text-primary" placeholder="Add Task..." value={task} onChange={(e) => setTask(e.target.value)} required />
+        <input type="text" className="bg-slate-50 px-5 py-2 w-[90%] outline-none text-primary tracking-wider" placeholder="Add Task..." value={task} onChange={(e) => setTask(e.target.value)} required />
       </form>
     </div>
   );
